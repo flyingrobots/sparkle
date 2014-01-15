@@ -1,5 +1,9 @@
-# sparkle
-A thin, modular game engine in JavaScript
+# Sparkle
+Sparkle is a thin, modular game engine for JavaScript.
 
-# example
-Pop `web/test.html` in your browser. The example game is silly (for now), but it illustrates how to build a game using Sparkle. More to come soon.
+## Example Game
+Peep `web/test.html` using a web browser, browse `example/` for the source. 
+
+The example game is silly (for now), but it illustrates how to build a game using Sparkle. 
+
+More to come soon.
