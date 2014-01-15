@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <!-- 
+    <link rel="stylesheet" type="text/css" href="./css/ink.css">
+    <link rel="stylesheet" type="text/css" href="./css/custom.css"> 
+    -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+    </style>
+  </head>
+  <body onload="startGame()">
+
+<!-- deps -->
+
+    <script type="text/javascript" src="../deps/pixi.js"></script>
+
+<!-- lib -->
+
+    <script type="text/javascript" src="../lib/dictionary.js"></script>
+    <script type="text/javascript" src="../lib/multimap.js"></script>
+    <script type="text/javascript" src="../lib/event.js"></script>
+    <script type="text/javascript" src="../lib/injector.js"></script>
+
+<!-- src -->
+
+    <script type="text/javascript" src="../src/entity.js"></script>
+    <script type="text/javascript" src="../src/entityManager.js"></script>
+    <script type="text/javascript" src="../src/node.js"></script>
+    <script type="text/javascript" src="../src/nodeConfig.js"></script>
+    <script type="text/javascript" src="../src/family.js"></script>
+    <script type="text/javascript" src="../src/system.js"></script>
+    <script type="text/javascript" src="../src/systemManager.js"></script>
+    <script type="text/javascript" src="../src/core.js"></script>
+
+<!-- example -->
+
+    <!-- components -->
+    <script type="text/javascript" src="../example/components/worldTransformComponent.js"></script>
+    <script type="text/javascript" src="../example/components/pixiSpriteComponent.js"></script>
+
+    <!-- node schemas -->
+    <script type="text/javascript" src="../example/nodes/pixiSpriteNodeSchema.js"></script>
+    <script type="text/javascript" src="../example/nodes/spinSystemNodeSchema.js"></script>
+
+    <!-- systems -->
+    <script type="text/javascript" src="../example/systems/pixiRenderingSystem.js"></script>
+    <script type="text/javascript" src="../example/systems/spinSystem.js"></script>
+    
+    <!-- utility -->
+    <script type="text/javascript" src="../example/utils/pixiDebugSpriteFactory.js"></script>
+    
+    <!-- game -->
+    <script type="text/javascript" src="../example/game.js"></script>
+
+<!-- entry point -->
+
+    <script type="text/javascript">
+      function startGame() {
+        var game = new Game();
+        game.initialize();
+      }
+    </script>
+
+  </body>
+</html>
