@@ -54,13 +54,13 @@
     return new SpinSystem(injector);
   }
 
-  Game.prototype.startTicker = function(hz) {
+  Game.prototype.startTicker = function(ms) {
     var ticks = this.tickCallbacks;
     this.ticker = window.setInterval(function() {
       ticks.forEach(function(func) {
         func();
       });
-    }, hz);
+    }, ms);
   };
 
   this.Game = Game;
