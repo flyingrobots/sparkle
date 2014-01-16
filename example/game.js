@@ -31,7 +31,7 @@
       this.createBoxEntity(boxWidth, boxHeight, boxPosition);
     }
 
-    this.startTicker(15);
+    this.startTicker(16);
   };
 
   Game.prototype.pixiInit = function(injector) {
@@ -42,7 +42,7 @@
     injector.set("pixiRenderingConfig", {
       width: window.innerWidth,
       height: window.innerHeight,
-      clearColor: 0xff6666
+      clearColor: 0x22222
     });
 
     var pixiRenderingSystem = new PixiRenderingSystem(injector);
