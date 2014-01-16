@@ -6,14 +6,9 @@
     this.onEntityDestroyed = new Event();
   }
 
-  EntityManager.prototype.create = function(schema) {
+  EntityManager.prototype.create = function(entityConfig) {
     var entity = new Entity();
-    var keys = Object.keys(schema);
-    var length = keys.length;
-    for (var k = 0; k < length; k++) {
-      var c = keys[k];
-      entity.add(keys[k], new schema[c]());
-    };
+    entity.append(entityConfig.schema);
     this.entities.push(entity);
     this.onEntityCreated.emit({entity: entity});
     return entity;

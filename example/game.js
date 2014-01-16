@@ -67,23 +67,33 @@
   }
 
   Game.prototype.createBoxEntity = function(width, height, position) {
-    var entity = this.core.entityManager.create(PixiSpriteNodeSchema);
+    var entityConfig = new EntityConfig();
+    entityConfig.add(PixiSpriteNodeSchema);
 
-    var colors = [
-      0xff0000,
-      0x00ff00,
-      0x0000ff
-    ];
+    var entity = this.core.entityManager.create(entityConfig);
+
+    function makeSprite() {
+      var colors = [
+        0xff0000,
+        0x00ff00,
+        0x0000ff
+      ];
     
-    var randomColorIndex = randomNumber(0, colors.length - 1);
-    var randomColor = colors[randomColorIndex];
+      var randomColorIndex = randomNumber(0, colors.length - 1);
+      var randomColor = colors[randomColorIndex];
 
-    var sprite = entity.get("sprite");
-    PixiDebugSpriteFactory.createBox(width, height, randomColor, sprite.context);
+      var sprite = entity.get("sprite");
+      PixiDebugSpriteFactory.createBox(width, height, randomColor, sprite.context);
+    }
 
-    var worldTransform = entity.get("worldTransform");
-    worldTransform.position.x = position.x;
-    worldTransform.position.y = position.y;
+    function setWorldPosition() {
+      var worldTransform = entity.get("worldTransform");
+      worldTransform.position.x = position.x;
+      worldTransform.position.y = position.y;
+    }
+
+    makeSprite();
+    setWorldPosition();
   };
 
   Game.prototype.startTicker = function(hz) {
