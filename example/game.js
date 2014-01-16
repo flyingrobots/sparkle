@@ -60,10 +60,8 @@
 
   Game.prototype.spinInit = function(injector) {
     var family = this.core.createFamily(new NodeConfig(SpinSystemNodeSchema));
-    
     injector.set("spinNodes", family.nodes);
-    
-    var spinSystem = new SpinSystem(injector);
+    this.core.systemManager.add(new SpinSystem(injector));
   }
 
   Game.prototype.createBoxEntity = function(width, height, position) {

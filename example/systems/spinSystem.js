@@ -10,16 +10,20 @@
     });
 
     var that = this;
+
+    var rotateNodes = function() {
+      that.nodes.forEach(function(node) {
+        node.worldTransform.rotation += 0.1;
+      });
+    }
+
     tick.push(function() {
-      that.spin();
+      rotateNodes();
     });
   }
 
-  SpinSystem.prototype.spin = function() {
-    this.nodes.forEach(function(node) {
-      node.worldTransform.rotation += 0.1;
-    });
-  };
+  SpinSystem.prototype = Object.create(System.prototype);
+  SpinSystem.prototype.constructor = SpinSystem;
 
   this.SpinSystem = SpinSystem;
 
