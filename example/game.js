@@ -6,10 +6,6 @@
     this.tickCallbacks = [];
   }
 
-  function randomNumber(min, max) {
-    return min + Math.floor(Math.random() * (max - min + 1));
-  }
-
   Game.prototype.initialize = function() {
     var injector = new Injector();
 
@@ -18,23 +14,17 @@
     this.tickCallbacks = [];
     injector.set("tick", this.tickCallbacks);
 
-    this.pixiInit(injector);
-    this.spinInit(injector);
+    this.core.systemManager.add(this.createPixiRenderingSystem(injector));
+    this.core.systemManager.add(this.createSpinSystem(injector));
 
-    for(var b = 0; b < 10; b++) {
-      var boxWidth = randomNumber(70, 100);
-      var boxHeight = randomNumber(120, 220);
-      var boxPosition = {
-        x: randomNumber(0, window.innerWidth),
-        y: randomNumber(0, window.innerHeight)
-      };
-      this.createBoxEntity(boxWidth, boxHeight, boxPosition);
+    for(var b = 0; b < 100; b++) {
+      ExampleEntityFactory.create(this.core.entityManager);
     }
 
     this.startTicker(16);
   };
 
-  Game.prototype.pixiInit = function(injector) {
+  Game.prototype.createPixiRenderingSystem = function(injector) {
     var family = this.core.createFamily(new NodeConfig(PixiSpriteNodeSchema));
 
     injector.set("pixiSpriteNodes", family.nodes);
@@ -55,44 +45,14 @@
       pixiRenderingSystem.remove(data.node.sprite);
     });
 
-    this.core.systemManager.add(pixiRenderingSystem);
+    return pixiRenderingSystem;
   };
 
-  Game.prototype.spinInit = function(injector) {
+  Game.prototype.createSpinSystem = function(injector) {
     var family = this.core.createFamily(new NodeConfig(SpinSystemNodeSchema));
     injector.set("spinNodes", family.nodes);
-    this.core.systemManager.add(new SpinSystem(injector));
+    return new SpinSystem(injector);
   }
-
-  Game.prototype.createBoxEntity = function(width, height, position) {
-    var entityConfig = new EntityConfig();
-    entityConfig.add(PixiSpriteNodeSchema);
-
-    var entity = this.core.entityManager.create(entityConfig);
-
-    function makeSprite() {
-      var colors = [
-        0xff0000,
-        0x00ff00,
-        0x0000ff
-      ];
-    
-      var randomColorIndex = randomNumber(0, colors.length - 1);
-      var randomColor = colors[randomColorIndex];
-
-      var sprite = entity.get("sprite");
-      PixiDebugSpriteFactory.createBox(width, height, randomColor, sprite.context);
-    }
-
-    function setWorldPosition() {
-      var worldTransform = entity.get("worldTransform");
-      worldTransform.position.x = position.x;
-      worldTransform.position.y = position.y;
-    }
-
-    makeSprite();
-    setWorldPosition();
-  };
 
   Game.prototype.startTicker = function(hz) {
     var ticks = this.tickCallbacks;
