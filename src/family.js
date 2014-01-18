@@ -13,7 +13,7 @@
     };
     this.componentRemovedCallback = function(obj) {
       that.componentRemoved(obj);
-    }
+    };
   }
 
   Family.prototype.add = function(entity) {

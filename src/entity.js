@@ -11,10 +11,10 @@
     var length = keys.length;
     for (var k = 0; k < length; k++) {
       var key = keys[k];
-      var component = new schema[key];
+      var component = new schema[key]();
       this.add(key, component);
-    };
-  }
+    }
+  };
 
   Entity.prototype.add = function(key, component) {
     this.remove(key);

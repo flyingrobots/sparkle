@@ -1,7 +1,7 @@
 (function() {
 
   function EntityConfig() {
-    this.schema = {}
+    this.schema = {};
   }
 
   EntityConfig.prototype.add = function(schema) {

@@ -20,11 +20,11 @@
         node.sprite.context.position.y = node.worldTransform.position.y;
         node.sprite.context.rotation = node.worldTransform.rotation;
       }
-    }
+    };
 
     var draw = function() {
       renderer.render(stage);
-    }
+    };
 
     var tick = injector.inject("tick", function() {
       throw new Error("missing tick");

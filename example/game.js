@@ -53,7 +53,7 @@
     var family = this.core.createFamily(new NodeConfig(SpinSystemNodeSchema));
     injector.set("spinNodes", family.nodes);
     return new SpinSystem(injector);
-  }
+  };
 
   Game.prototype.startTicker = function(ms) {
     var ticks = this.tickCallbacks;

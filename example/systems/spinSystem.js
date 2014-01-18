@@ -15,7 +15,7 @@
       that.nodes.forEach(function(node) {
         node.worldTransform.rotation += 0.01 * node.spinSpeed.speed;
       });
-    }
+    };
 
     tick.push(function() {
       rotateNodes();

@@ -30,7 +30,7 @@
     });
 
     this.entityManager.onEntityCreated.addListener(function(data) {
-      family.add(data.entity)
+      family.add(data.entity);
     });
 
     this.entityManager.onEntityDestroyed.addListener(function(data) {
