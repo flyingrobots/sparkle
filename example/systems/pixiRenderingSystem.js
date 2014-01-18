@@ -26,7 +26,9 @@
       renderer.render(stage);
     }
 
-    var tick = injector.inject("tick", function() {throw new Error("missing tick");});
+    var tick = injector.inject("tick", function() {
+      throw new Error("missing tick");
+    });
 
     tick.push(function() {
       updateSprites();
