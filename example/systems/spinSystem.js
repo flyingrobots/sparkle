@@ -1,25 +1,16 @@
 (function() {
 
   function SpinSystem(injector) {
-    this.nodes = injector.inject("spinNodes", function() {
-      throw new Error("missing spin nodes");
-    });
+    var nodes = injector.inject("spinNodes");
+    var tick = injector.inject("tick");
 
-    var tick = injector.inject("tick", function() {
-      throw new Error("missing tick callbacks");
-    });
-
-    var that = this;
-
-    var rotateNodes = function() {
-      that.nodes.forEach(function(node) {
-        node.worldTransform.rotation += 0.01 * node.spinSpeed.speed;
+    function rotateNodes() {
+      nodes.forEach(function(n) {
+        n.worldTransform.rotation += 0.01 * n.spinSpeed.speed;
       });
     };
 
-    tick.push(function() {
-      rotateNodes();
-    });
+    tick.push(rotateNodes);
   }
 
   SpinSystem.prototype = Object.create(System.prototype);

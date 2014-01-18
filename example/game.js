@@ -1,64 +1,56 @@
 (function(){
 
-  function Game() {
-    this.core = null;
-    this.ticker = null;
-    this.tickCallbacks = [];
-  }
+  function Game() {}
 
   Game.prototype.initialize = function() {
     var injector = new Injector();
+    
+    var core = new Core(injector);
 
-    this.core = new Core(injector);
+    var tickCallbacks = [];
+    injector.set("tick", tickCallbacks);
 
-    this.tickCallbacks = [];
-    injector.set("tick", this.tickCallbacks);
+    function createPixiRenderingSystem() {
+      var family = core.createFamily(new NodeConfig(PixiSpriteNodeSchema));
 
-    this.core.systemManager.add(this.createPixiRenderingSystem(injector));
-    this.core.systemManager.add(this.createSpinSystem(injector));
+      injector.set("pixiSpriteNodes", family.nodes);
+
+      injector.set("pixiRenderingConfig", {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        clearColor: 0x22222
+      });
+
+      var system = new PixiRenderingSystem(injector);
+
+      family.onEntityAdded.addListener(function(data) {
+        system.add(data.node.sprite);
+      });
+
+      family.onEntityRemoved.addListener(function(data){
+        system.remove(data.node.sprite);
+      });
+
+      return system;
+    }
+
+    function createSpinSystem() {
+      var family = core.createFamily(new NodeConfig(SpinSystemNodeSchema));
+      injector.set("spinNodes", family.nodes);
+      return new SpinSystem(injector);
+    }
+
+    core.systemManager.add(createPixiRenderingSystem());
+    core.systemManager.add(createSpinSystem());
 
     var entityCount = Maths.randomNumber(75, 150);
     for(var b = 0; b < entityCount; b++) {
-      ExampleEntityFactory.create(this.core.entityManager);
+      ExampleEntityFactory.create(core.entityManager);
     }
 
-    this.startTicker(16);
-  };
-
-  Game.prototype.createPixiRenderingSystem = function(injector) {
-    var family = this.core.createFamily(new NodeConfig(PixiSpriteNodeSchema));
-
-    injector.set("pixiSpriteNodes", family.nodes);
-
-    injector.set("pixiRenderingConfig", {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      clearColor: 0x22222
-    });
-
-    var pixiRenderingSystem = new PixiRenderingSystem(injector);
-
-    family.onEntityAdded.addListener(function(data) {
-      pixiRenderingSystem.add(data.node.sprite);
-    });
-
-    family.onEntityRemoved.addListener(function(data){
-      pixiRenderingSystem.remove(data.node.sprite);
-    });
-
-    return pixiRenderingSystem;
-  };
-
-  Game.prototype.createSpinSystem = function(injector) {
-    var family = this.core.createFamily(new NodeConfig(SpinSystemNodeSchema));
-    injector.set("spinNodes", family.nodes);
-    return new SpinSystem(injector);
-  };
-
-  Game.prototype.startTicker = function(ms) {
-    var ticks = this.tickCallbacks;
-    this.ticker = window.setInterval(function() {
-      ticks.forEach(function(func) {
+    var ms = 16;
+    ticker = window.setInterval(function() {
+      tickCallbacks.forEach(function(func) {
         func();
       });
     }, ms);

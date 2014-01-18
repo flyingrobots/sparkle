@@ -1,18 +1,13 @@
 (function() {
 
   function PixiRenderingSystem(injector) {
-    var pixiConfig = injector.inject("pixiRenderingConfig", function() {
-      throw new Error("missing pixi rendering config");
-    });
-
-    var nodes = injector.inject("pixiSpriteNodes", function() {
-      throw new Error("missing pixi stage nodes");
-    });
+    var pixiConfig = injector.inject("pixiRenderingConfig");
+    var nodes = injector.inject("pixiSpriteNodes");
 
     var stage = new PIXI.Stage(pixiConfig.clearColor);
     var renderer = PIXI.autoDetectRenderer(pixiConfig.width, pixiConfig.height);
 
-    var updateSprites = function() {
+    function updateSprites() {
       var nodeCount = nodes.length;
       for (var n = 0; n < nodeCount; n++) {
         var node = nodes[n];
@@ -20,16 +15,14 @@
         node.sprite.context.position.y = node.worldTransform.position.y;
         node.sprite.context.rotation = node.worldTransform.rotation;
       }
-    };
+    }
 
-    var draw = function() {
+    function draw() {
       renderer.render(stage);
-    };
+    }
 
-    var tick = injector.inject("tick", function() {
-      throw new Error("missing tick");
-    });
-
+    var tick = injector.inject("tick");
+    
     tick.push(function() {
       updateSprites();
       draw();

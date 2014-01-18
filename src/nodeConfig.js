@@ -7,6 +7,7 @@
   NodeConfig.prototype.makeNode = function(entity) {
     var node = new Node();
     node.entity = entity;
+
     var keys = Object.keys(this.schema);
     var length = keys.length;
     for (var i = 0; i < length; i++) {
@@ -18,6 +19,7 @@
         return null; // unable to complete the node, bail.
       }
     }
+    
     return node;
   };
 

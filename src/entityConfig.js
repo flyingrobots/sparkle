@@ -9,7 +9,7 @@
     Object.keys(schema).forEach(function(k) {
       that.schema[k] = schema[k];
     });
-    return this; // for chaining
+    return this;
   };
 
   this.EntityConfig = EntityConfig;

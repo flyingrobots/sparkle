@@ -37,13 +37,13 @@
     spinSpeed.speed = Maths.randomNumber(-5.0, 5.0);
   }
 
+  var exampleEntityConfig = new EntityConfig();
+  exampleEntityConfig.add(PixiSpriteNodeSchema);
+  exampleEntityConfig.add(SpinSystemNodeSchema);
+
   this.ExampleEntityFactory = {
     create: function(entityManager) {
-      var entityConfig = new EntityConfig();
-      entityConfig.add(PixiSpriteNodeSchema);
-      entityConfig.add(SpinSystemNodeSchema);
-
-      var entity = entityManager.create(entityConfig);
+      var entity = entityManager.create(exampleEntityConfig);
       
       var size = {
         width: Maths.randomNumber(100, 200),
