@@ -13,7 +13,7 @@
 
     var rotateNodes = function() {
       that.nodes.forEach(function(node) {
-        node.worldTransform.rotation += 0.1;
+        node.worldTransform.rotation += 0.01 * node.spinSpeed.speed;
       });
     }
 

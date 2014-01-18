@@ -1,7 +1,8 @@
 (function() {
 
   this.SpinSystemNodeSchema = {
-    worldTransform: WorldTransformComponent
+    worldTransform: WorldTransformComponent,
+    spinSpeed: SpinSpeedComponent
   };
 
 })();

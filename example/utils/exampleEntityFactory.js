@@ -19,40 +19,45 @@
     0xd27b53
   ];
 
-  function randomNumber(min, max) {
-    return min + Math.floor(Math.random() * (max - min + 1));
-  }
-
-  function setSprite(sprite, width, height) {
-    var randomColorIndex = randomNumber(0, colors.length - 1);
+  function setSprite(entity, width, height) {
+    var sprite = entity.get("sprite");
+    var randomColorIndex = Maths.randomNumber(0, colors.length - 1);
     var randomColor = colors[randomColorIndex];
     PixiDebugSpriteFactory.createBox(width, height, randomColor, sprite.context);
   }
 
-  function setPosition(worldTransform, position) {
+  function setPosition(entity, position) {
+    var worldTransform = entity.get("worldTransform");
     worldTransform.position.x = position.x;
     worldTransform.position.y = position.y;
+  }
+
+  function setSpinSpeed(entity) {
+    var spinSpeed = entity.get("spinSpeed");
+    spinSpeed.speed = Maths.randomNumber(-5.0, 5.0);
   }
 
   this.ExampleEntityFactory = {
     create: function(entityManager) {
       var entityConfig = new EntityConfig();
       entityConfig.add(PixiSpriteNodeSchema);
+      entityConfig.add(SpinSystemNodeSchema);
 
       var entity = entityManager.create(entityConfig);
       
       var size = {
-        width : randomNumber(100, 200),
-        height: randomNumber(100, 200)
+        width: Maths.randomNumber(100, 200),
+        height: Maths.randomNumber(100, 200)
       };
 
       var position = {
-        x: randomNumber(0, window.innerWidth),
-        y: randomNumber(0, window.innerHeight)
+        x: Maths.randomNumber(0, window.innerWidth),
+        y: Maths.randomNumber(0, window.innerHeight)
       };
 
-      setSprite(entity.get("sprite"), size.width, size.height);
-      setPosition(entity.get("worldTransform"), position);
+      setSprite(entity, size.width, size.height);
+      setPosition(entity, position);
+      setSpinSpeed(entity);
 
       return entity;
     }

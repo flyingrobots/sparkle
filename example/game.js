@@ -17,7 +17,8 @@
     this.core.systemManager.add(this.createPixiRenderingSystem(injector));
     this.core.systemManager.add(this.createSpinSystem(injector));
 
-    for(var b = 0; b < 100; b++) {
+    var entityCount = Maths.randomNumber(75, 150);
+    for(var b = 0; b < entityCount; b++) {
       ExampleEntityFactory.create(this.core.entityManager);
     }
 
