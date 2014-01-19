@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sparkle Test Game</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #222;
+      }
+    </style>
+  </head>
+  <body onload="startGame()">
+
+<!-- deps -->
+
+    <script type="text/javascript" src="../deps/pixi.js"></script>
+
+<!-- lib -->
+
+    <script type="text/javascript" src="../../lib/dictionary.js"></script>
+    <script type="text/javascript" src="../../lib/multimap.js"></script>
+    <script type="text/javascript" src="../../lib/event.js"></script>
+    <script type="text/javascript" src="../../lib/injector.js"></script>
+    <script type="text/javascript" src="../../lib/maths.js"></script>
+
+<!-- src -->
+
+    <script type="text/javascript" src="../../src/entity.js"></script>
+    <script type="text/javascript" src="../../src/entityConfig.js"></script>
+    <script type="text/javascript" src="../../src/entityManager.js"></script>
+    <script type="text/javascript" src="../../src/node.js"></script>
+    <script type="text/javascript" src="../../src/nodeConfig.js"></script>
+    <script type="text/javascript" src="../../src/family.js"></script>
+    <script type="text/javascript" src="../../src/system.js"></script>
+    <script type="text/javascript" src="../../src/systemManager.js"></script>
+    <script type="text/javascript" src="../../src/core.js"></script>
+
+<!-- example game -->
+
+    <script type="text/javascript" src="../components/worldTransformComponent.js"></script>
+    <script type="text/javascript" src="../components/pixiSpriteComponent.js"></script>
+    <script type="text/javascript" src="../components/spinSpeedComponent.js"></script>
+    
+    <script type="text/javascript" src="../nodes/pixiSpriteNodeSchema.js"></script>
+    <script type="text/javascript" src="../nodes/spinSystemNodeSchema.js"></script>
+    
+    <script type="text/javascript" src="../systems/pixiRenderingSystem.js"></script>
+    <script type="text/javascript" src="../systems/spinSystem.js"></script>
+    <script type="text/javascript" src="../systems/keyboardSystem.js"></script>
+
+    <script type="text/javascript" src="../utils/pixiDebugSpriteFactory.js"></script>
+    <script type="text/javascript" src="../utils/exampleEntityFactory.js"></script>    
+    
+    <script type="text/javascript" src="../game.js"></script>
+
+<!-- app entry point -->
+
+    <script type="text/javascript">
+      function startGame() {
+        var game = new Game();
+        game.initialize();
+      }
+    </script>
+
+  </body>
+</html>
