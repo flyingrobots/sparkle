@@ -40,8 +40,23 @@
       return new SpinSystem(injector);
     }
 
+    function createKeyboardSystem() {
+      var system = new KeyboardSystem();
+      
+      system.onKeyDown.addListener(function(data) {
+        console.log("Key down: " + data.key);
+      });
+
+      system.onKeyUp.addListener(function(data) {
+        console.log("Key up: " + data.key);
+      });
+
+      return system;
+    }
+
     core.systemManager.add(createPixiRenderingSystem());
     core.systemManager.add(createSpinSystem());
+    core.systemManager.add(createKeyboardSystem());
 
     var entityCount = Maths.randomNumber(75, 150);
     for(var b = 0; b < entityCount; b++) {
